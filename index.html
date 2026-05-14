@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="zh-Hans">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>城市里应该有鲜花｜角色心测</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="scene" aria-hidden="true"></div>
+
+    <main class="app" id="app">
+      <section class="screen intro-screen" id="introScreen">
+        <div class="intro-copy">
+          <p class="eyebrow">暮春秋色系列</p>
+          <h1>城市里应该有鲜花</h1>
+          <p class="subtitle">即使被人摘掉，鲜花也应该长出来。</p>
+        </div>
+
+        <div class="quiz-surface intro-surface">
+          <div class="surface-head">
+            <span>角色心测</span>
+            <span>YOUTH · ROCK · FLOWERS</span>
+          </div>
+
+          <div class="field">
+            <div class="field-label">角色范围</div>
+            <div class="segmented" role="radiogroup" aria-label="角色范围">
+              <button class="segment is-active" type="button" data-preference="all">全部</button>
+              <button class="segment" type="button" data-preference="male">男角色</button>
+              <button class="segment" type="button" data-preference="female">女角色</button>
+            </div>
+          </div>
+
+          <div class="role-preview-strip" id="rolePreviewStrip" aria-label="可匹配角色"></div>
+
+          <button class="primary-action" id="startButton" type="button">
+            开始心测
+          </button>
+        </div>
+      </section>
+
+      <section class="screen quiz-screen is-hidden" id="quizScreen" aria-live="polite">
+        <div class="quiz-surface">
+          <div class="quiz-topline">
+            <div>
+              <p class="eyebrow compact" id="questionKicker">校园</p>
+              <div class="step-count"><span id="currentStep">01</span> / <span id="totalSteps">10</span></div>
+            </div>
+            <button class="ghost-action" id="restartButton" type="button">重来</button>
+          </div>
+
+          <div class="progress-track" aria-hidden="true">
+            <div class="progress-fill" id="progressFill"></div>
+          </div>
+
+          <h2 id="questionTitle"></h2>
+          <div class="options" id="options"></div>
+
+          <div class="quiz-actions">
+            <button class="secondary-action" id="prevButton" type="button">上一题</button>
+            <button class="primary-action" id="nextButton" type="button">下一题</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="screen result-screen is-hidden" id="resultScreen" aria-live="polite">
+        <div class="quiz-surface result-surface">
+          <div class="surface-head">
+            <span>你的角色</span>
+            <span id="resultMatch">MATCH</span>
+          </div>
+
+          <div class="result-layout">
+            <figure class="role-poster">
+              <img id="roleImage" alt="" />
+              <figcaption id="roleCaption"></figcaption>
+            </figure>
+
+            <div class="role-copy">
+              <div class="role-badge" id="roleBadge"></div>
+              <h2 id="roleName"></h2>
+              <p class="role-line" id="roleLine"></p>
+              <p class="role-description" id="roleDescription"></p>
+              <div class="role-tags" id="roleTags"></div>
+            </div>
+          </div>
+
+          <div class="quiz-actions result-actions">
+            <button class="secondary-action" id="againButton" type="button">再测一次</button>
+            <button class="primary-action" id="shareButton" type="button">复制结果</button>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <script src="app.js"></script>
+  </body>
+</html>
