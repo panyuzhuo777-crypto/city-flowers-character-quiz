@@ -4,9 +4,22 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>城市里应该有鲜花｜角色心测</title>
+    <link rel="icon" href="assets/title-art.png" type="image/png" />
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
+    <audio id="bgm" src="assets/audio/city-flowers-bgm.mp3" loop preload="auto"></audio>
+    <button
+      class="audio-toggle is-playing"
+      id="audioToggle"
+      type="button"
+      aria-label="背景音樂目前開啟，點擊關閉"
+      aria-pressed="true"
+    >
+      <span aria-hidden="true">♪</span>
+      <span id="audioToggleLabel">BGM ON</span>
+    </button>
+
     <div class="scene" aria-hidden="true"></div>
 
     <main class="app" id="app">
@@ -33,8 +46,6 @@
               <button class="segment" type="button" data-preference="female">女角色</button>
             </div>
           </div>
-
-          <div class="role-preview-strip" id="rolePreviewStrip" aria-label="可匹配角色"></div>
 
           <button class="primary-action" id="startButton" type="button">
             开始心测
@@ -69,28 +80,22 @@
       <section class="screen result-screen is-hidden" id="resultScreen" aria-live="polite">
         <div class="quiz-surface result-surface">
           <div class="surface-head">
-            <span>你的角色</span>
-            <span id="resultMatch">MATCH</span>
+            <span>你的角色封面</span>
+            <span>RESULT</span>
           </div>
 
-          <div class="result-layout">
-            <figure class="role-poster">
-              <img id="roleImage" alt="" />
-              <figcaption id="roleCaption"></figcaption>
-            </figure>
-
-            <div class="role-copy">
-              <div class="role-badge" id="roleBadge"></div>
-              <h2 id="roleName"></h2>
-              <p class="role-line" id="roleLine"></p>
-              <p class="role-description" id="roleDescription"></p>
-              <div class="role-tags" id="roleTags"></div>
-            </div>
-          </div>
+          <figure class="role-poster">
+            <img id="roleImage" alt="測驗結果角色封面" />
+          </figure>
 
           <div class="quiz-actions result-actions">
             <button class="secondary-action" id="againButton" type="button">再测一次</button>
-            <button class="primary-action" id="shareButton" type="button">复制结果</button>
+            <a
+              class="primary-action save-action"
+              id="saveButton"
+              href="#"
+              download="city-flowers-character-cover.jpg"
+            >保存封面</a>
           </div>
         </div>
       </section>
