@@ -3,27 +3,39 @@ const roleOrder = ["role01", "role02", "role03", "role04", "role05", "role06"];
 const roles = {
   role01: {
     gender: "male",
-    image: "assets/characters/character-01.jpg"
+    image: "assets/characters/character-01.jpg",
+    maxScore: 13,
+    absoluteMaxScore: 16.5
   },
   role02: {
     gender: "female",
-    image: "assets/characters/character-02.jpg"
+    image: "assets/characters/character-02.jpg",
+    maxScore: 12,
+    absoluteMaxScore: 15.5
   },
   role03: {
     gender: "male",
-    image: "assets/characters/character-03.jpg"
+    image: "assets/characters/character-03.jpg",
+    maxScore: 9,
+    absoluteMaxScore: 11.5
   },
   role04: {
     gender: "female",
-    image: "assets/characters/character-04.jpg"
+    image: "assets/characters/character-04.jpg",
+    maxScore: 12,
+    absoluteMaxScore: 15.5
   },
   role05: {
     gender: "male",
-    image: "assets/characters/character-05.jpg"
+    image: "assets/characters/character-05.jpg",
+    maxScore: 9,
+    absoluteMaxScore: 11.5
   },
   role06: {
     gender: "female",
-    image: "assets/characters/character-06.jpg"
+    image: "assets/characters/character-06.jpg",
+    maxScore: 9,
+    absoluteMaxScore: 11.5
   }
 };
 
@@ -166,6 +178,8 @@ const bgm = document.querySelector("#bgm");
 const audioToggle = document.querySelector("#audioToggle");
 const audioToggleLabel = document.querySelector("#audioToggleLabel");
 const saveButton = document.querySelector("#saveButton");
+const resultMatch = document.querySelector("#resultMatch");
+const matchList = document.querySelector("#matchList");
 let bgmEnabled = true;
 
 totalSteps.textContent = String(questions.length).padStart(2, "0");
@@ -342,27 +356,55 @@ function getScores() {
   return scores;
 }
 
-function getWinner(scores) {
-  const candidates = roleOrder
+function getRankings(scores) {
+  return roleOrder
     .filter((role) => state.preference === "all" || roles[role].gender === state.preference)
-    .map((role) => ({ role, score: scores[role] }))
+    .map((role) => ({
+      role,
+      score: scores[role],
+      match: Math.round((scores[role] / roles[role].maxScore) * 100)
+    }))
     .sort((a, b) => {
+      if (b.match !== a.match) return b.match - a.match;
       if (b.score !== a.score) return b.score - a.score;
       return roleOrder.indexOf(a.role) - roleOrder.indexOf(b.role);
     });
-
-  return candidates[0];
 }
 
 function renderResult() {
   const scores = getScores();
-  const winner = getWinner(scores);
+  const rankings = getRankings(scores);
+  const winner = rankings[0];
   const role = roles[winner.role];
   roleImage.src = role.image;
   roleImage.alt = "測驗結果角色封面";
   saveButton.href = role.image;
+  resultMatch.textContent = `${winner.match}%`;
+  renderMatchList(rankings.slice(1));
 
   showScreen("result");
+}
+
+function renderMatchList(rankings) {
+  matchList.innerHTML = "";
+
+  rankings.forEach((candidate, index) => {
+    const item = document.createElement("div");
+    const barWidth = Math.min(100, Math.max(0, candidate.match));
+    const stateClass = candidate.match < 0 ? " is-negative" : candidate.match > 100 ? " is-over" : "";
+
+    item.className = `match-item${stateClass}`;
+    item.innerHTML = `
+      <div class="match-meta">
+        <span>候选角色 ${String(index + 1).padStart(2, "0")}</span>
+        <strong>${candidate.match}%</strong>
+      </div>
+      <div class="match-track" aria-hidden="true">
+        <span style="width: ${barWidth}%"></span>
+      </div>
+    `;
+    matchList.appendChild(item);
+  });
 }
 
 function resetQuiz() {

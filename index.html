@@ -84,9 +84,19 @@
             <span>RESULT</span>
           </div>
 
+          <div class="result-match" aria-label="角色匹配度">
+            <span>角色匹配度</span>
+            <strong id="resultMatch">--%</strong>
+          </div>
+
           <figure class="role-poster">
             <img id="roleImage" alt="測驗結果角色封面" />
           </figure>
+
+          <section class="other-matches" aria-labelledby="otherMatchesTitle">
+            <div class="other-matches-title" id="otherMatchesTitle">其他角色匹配度</div>
+            <div class="match-list" id="matchList"></div>
+          </section>
 
           <div class="quiz-actions result-actions">
             <button class="secondary-action" id="againButton" type="button">再测一次</button>
