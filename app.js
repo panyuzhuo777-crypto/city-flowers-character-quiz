@@ -39,6 +39,12 @@ const roles = {
   }
 };
 
+const roleImagePreloads = roleOrder.map((role) => {
+  const image = new Image();
+  image.src = roles[role].image;
+  return image;
+});
+
 const roleEmotions = {
   role01: ["爱情", "友情"],
   role02: ["友情", "爱情", "母爱"],
