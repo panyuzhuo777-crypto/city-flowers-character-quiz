@@ -388,19 +388,28 @@ function renderResult() {
 function renderMatchList(rankings) {
   matchList.innerHTML = "";
 
-  rankings.forEach((candidate, index) => {
+  rankings.forEach((candidate) => {
     const item = document.createElement("div");
     const barWidth = Math.min(100, Math.max(0, candidate.match));
     const stateClass = candidate.match < 0 ? " is-negative" : candidate.match > 100 ? " is-over" : "";
+    const candidateRole = roles[candidate.role];
 
     item.className = `match-item${stateClass}`;
     item.innerHTML = `
-      <div class="match-meta">
-        <span>候选角色 ${String(index + 1).padStart(2, "0")}</span>
-        <strong>${candidate.match}%</strong>
-      </div>
-      <div class="match-track" aria-hidden="true">
-        <span style="width: ${barWidth}%"></span>
+      <img
+        class="match-cover"
+        src="${candidateRole.image}"
+        alt="候选角色封面"
+        loading="lazy"
+      />
+      <div class="match-details">
+        <div class="match-meta">
+          <span>角色匹配度</span>
+          <strong>${candidate.match}%</strong>
+        </div>
+        <div class="match-track" aria-hidden="true">
+          <span style="width: ${barWidth}%"></span>
+        </div>
       </div>
     `;
     matchList.appendChild(item);

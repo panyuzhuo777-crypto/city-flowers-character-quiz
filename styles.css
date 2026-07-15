@@ -450,10 +450,32 @@ h1 {
 
 .match-list {
   display: grid;
-  gap: 12px;
+  gap: 14px;
 }
 
 .match-item {
+  min-width: 0;
+  display: grid;
+  grid-template-columns: 72px minmax(0, 1fr);
+  align-items: center;
+  gap: 14px;
+  padding: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.11);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.045);
+}
+
+.match-cover {
+  display: block;
+  width: 72px;
+  aspect-ratio: 2480 / 3508;
+  object-fit: contain;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 6px;
+  background: rgba(3, 12, 17, 0.72);
+}
+
+.match-details {
   min-width: 0;
 }
 
