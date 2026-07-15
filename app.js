@@ -400,7 +400,7 @@ function renderMatchList(rankings) {
         class="match-cover"
         src="${candidateRole.image}"
         alt="候选角色封面"
-        loading="lazy"
+        loading="eager"
       />
       <div class="match-details">
         <div class="match-meta">
